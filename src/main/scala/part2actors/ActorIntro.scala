@@ -28,6 +28,9 @@ object ActorIntro extends App {
   wordCounter ! "I am learning Akka and its pretty cool!" // ! --> tell
   anotherWordCounter ! "I different message"
 
+  object Person {
+    def props(name: String) = Props(new Person(name))
+  }
 
   class Person(name: String) extends Actor {
     def receive: Receive = {
@@ -36,7 +39,7 @@ object ActorIntro extends App {
     }
   }
 
-  val person = actorSystem.actorOf(Props(new Person("Bob")))
+  val person = actorSystem.actorOf(Person.props("Bob"))
 
   person ! "hi"
 
