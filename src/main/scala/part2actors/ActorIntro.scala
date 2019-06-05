@@ -29,5 +29,15 @@ object ActorIntro extends App {
   anotherWordCounter ! "I different message"
 
 
+  class Person(name: String) extends Actor {
+    def receive: Receive = {
+      case "hi" => println(s"Hi, my name is $name")
+      case _ =>
+    }
+  }
+
+  val person = actorSystem.actorOf(Props(new Person("Bob")))
+
+  person ! "hi"
 
 }
