@@ -4,10 +4,12 @@ import akka.actor.{Actor, ActorSystem, Props}
 
 object ActorIntro extends App {
 
+  //part1 - actor sys
   val actorSystem = ActorSystem("firstActorSystem")
   println(actorSystem.name)
 
 
+  //part2 - create actor
   class WordCountActor extends Actor {
     var totalWords = 0;
 
@@ -20,11 +22,11 @@ object ActorIntro extends App {
     }
   }
 
-  //initiation of actor
+  //part3 - initiation of actor
   val wordCounter = actorSystem.actorOf(Props[WordCountActor], "wordCounter")
   val anotherWordCounter = actorSystem.actorOf(Props[WordCountActor], "anotherWordCounter")
 
-  //communicate
+  //part4 - communicate
   wordCounter ! "I am learning Akka and its pretty cool!" // ! --> tell
   anotherWordCounter ! "I different message"
 
